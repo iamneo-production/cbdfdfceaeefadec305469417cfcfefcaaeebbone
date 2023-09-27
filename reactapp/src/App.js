@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState} from 'react';
 
 function App() {
+
+  const [name,setName] = useState('');
+  const[greeting,setGreeting] = useState('');
+
+const handleChange = (e) =>{
+  setName(e.target.value);
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setGreeting(`Hello,${name}`);
+}
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="contents">
+        <h3>Hey!!! Greeting</h3>
+        <form onSubmit={handleSubmit} data-testid="form">
+          <label data-testid="label">Enter name :</label>
+          <input type="text" value={name} onChange={handleChange}/>
+          <button type="submit" data-testid="buttonElement">Say Hello</button>
+          </form>
+          {greeting && <h2>{greeting}</h2>}
+    </div>
     </div>
   );
 }
